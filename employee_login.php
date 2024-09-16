@@ -21,7 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
-            if (password_verify($password, $row['password'])) {
+
+            // Direct plain text password verification
+            if ($password === $row['password']) {
                 // Employee login successful
                 $_SESSION["usertype"] = "employee";
                 $_SESSION["employee_id"] = $row['employee_id'];
@@ -38,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>
