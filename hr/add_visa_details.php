@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Insert visa application details into the database
     $sql = "INSERT INTO visa_applications (employee_id, country, visa_type, application_date, interview_date, interview_status, visa_status, visa_issued_date, visa_expiry_date) VALUES ('$employee_id', '$country', '$visa_type', '$application_date', '$interview_date', '$interview_status', '$visa_status', '$visa_issued_date', '$visa_expiry_date')";
     if (mysqli_query($conn, $sql)) {
-        header("Location: view_applications.php");
+        header("Location: view_application.php");
         exit;
     } else {
         $error_message = "Error: " . mysqli_error($conn);

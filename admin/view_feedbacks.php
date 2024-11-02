@@ -8,6 +8,20 @@ if (!isset($_SESSION["usertype"]) || $_SESSION["usertype"] !== "admin") {
     exit;
 }
 
+// Delete feedback if the request is made
+if (isset($_POST['delete_feedback'])) {
+    $feedback_id = $_POST['feedback_id'];
+    $delete_sql = "DELETE FROM feedbacks WHERE feedback_id = ?";
+    $stmt = mysqli_prepare($conn, $delete_sql);
+    mysqli_stmt_bind_param($stmt, "i", $feedback_id);
+    if (mysqli_stmt_execute($stmt)) {
+        echo "<script>alert('Feedback deleted successfully!');</script>";
+    } else {
+        echo "<script>alert('Error deleting feedback!');</script>";
+    }
+    mysqli_stmt_close($stmt);
+}
+
 // Fetch all feedbacks from the database with employee and HR names
 $sql_feedbacks = "SELECT f.feedback_id, f.feedback, f.created_at, e.full_name AS employee_name, h.full_name AS hr_name
                  FROM feedbacks f
@@ -50,7 +64,7 @@ $result_feedbacks = mysqli_query($conn, $sql_feedbacks);
                 echo "<td>".$row_feedback["feedback"]."</td>";
                 echo "<td>".$row_feedback["created_at"]."</td>";
                 echo "<td>
-                        <form method='post' action='delete_feedback.php' style='display:inline;'>
+                        <form method='post' onsubmit='return confirmDelete();' style='display:inline;'>
                             <input type='hidden' name='feedback_id' value='".$row_feedback["feedback_id"]."'>
                             <button type='submit' name='delete_feedback' class='btn btn-danger'>Delete</button>
                         </form>
@@ -65,5 +79,11 @@ $result_feedbacks = mysqli_query($conn, $sql_feedbacks);
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+// Confirmation dialog for deletion
+function confirmDelete() {
+    return confirm("Are you sure you want to delete this feedback?");
+}
+</script>
 </body>
 </html>
