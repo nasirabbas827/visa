@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate and update HR details
     $update_sql = "UPDATE hr SET full_name = '$full_name'";
     if (!empty($password)) {
-        $update_sql .= ", password = '$password'";
+        $update_sql .= ", password = "YOUR_OWN_API_KEY"";
     }
     $update_sql .= " WHERE email = '$email'";
 
