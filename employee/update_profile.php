@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Update password
-        $sql_update_password = "UPDATE employees SET password = '$hashed_password' WHERE employee_id = '$employee_id'";
+        $sql_update_password = "YOUR_OWN_API_KEY"$hashed_password' WHERE employee_id = '$employee_id'";
         if (mysqli_query($conn, $sql_update_password)) {
             $success_message = "Password updated successfully!";
         } else {
