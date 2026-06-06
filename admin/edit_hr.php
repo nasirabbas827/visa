@@ -32,7 +32,7 @@ function updateHR($conn, $hr_id, $username, $full_name, $email, $password) {
     $sql = "UPDATE hr SET username='$username', full_name='$full_name', email='$email'";
     if (!empty($password)) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $sql .= ", password='$hashed_password'";
+        $sql .= ", password="YOUR_OWN_API_KEY"";
     }
     $sql .= " WHERE hr_id = $hr_id";
     
