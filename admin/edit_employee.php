@@ -32,7 +32,7 @@ function updateEmployee($conn, $employee_id, $email, $password, $full_name, $pos
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $sql = "UPDATE employees SET email='$email', full_name='$full_name', position='$position', department='$department', location='$location', hire_date='$hire_date', current_visa_status='$current_visa_status', visa_expiry_date='$visa_expiry_date'";
     if (!empty($password)) {
-        $sql .= ", password='$hashed_password'";
+        $sql .= ", password="YOUR_OWN_API_KEY"";
     }
     $sql .= " WHERE employee_id = $employee_id";
     
